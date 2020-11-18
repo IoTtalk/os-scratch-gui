@@ -1,2 +1,2 @@
-exports.IoTtalkURL = "https://iottalk.scratchtalk.tw";
-exports.ServerName = "https://scratchtalk.tw";
+exports.iottalkURL = "<iottalk URL>";
+exports.serverName = "<scratch domain name>";

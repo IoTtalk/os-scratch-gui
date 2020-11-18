@@ -4,7 +4,7 @@ import ReactModal from 'react-modal';
 
 import styles from './iottalk-connection-button.css';
 import qrcodeIcon from "./qrcode_scan.png";
-import {IoTtalkURL} from '../../../config';
+import {iottalkURL} from '../../../config';
 
 export default class IoTtalkConnectionBtn extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ export default class IoTtalkConnectionBtn extends Component {
     }
 
     showIottalkConn() {
-        window.open(IoTtalkURL+"/connection");
+        window.open(iottalkURL+"/connection");
     }
 
     render() {

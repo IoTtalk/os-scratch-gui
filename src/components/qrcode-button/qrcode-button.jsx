@@ -9,7 +9,7 @@ import Button from '../button/button.jsx';
 import CloseButton from '../close-button/close-button.jsx';
 import styles from './qrcode-button.css';
 import qrcodeIcon from "./qrcode_scan.png";
-import {ServerName} from "../../../config";
+import {serverName} from "../../../config";
 import eventBus from "../../util/EventBus";
 
 export default class QrcodeBtn extends Component {
@@ -79,7 +79,7 @@ export default class QrcodeBtn extends Component {
                                 return(
                                     <div className={classNames(styles.qrcodeCard)}>
                                         <div className={classNames(styles.qrcodeItem)}>Player {i+1}</div>
-                                        <QRCode value={ServerName+"/smartphone?do_id="+do_id+"&p_id="+this.state.p_id} className={styles.reactQRcode, styles.qrcodeItem} size={200}/>
+                                        <QRCode value={serverName+"/service/rc/smartphone?do_id="+do_id+"&p_id="+this.state.p_id} className={styles.reactQRcode, styles.qrcodeItem} size={200}/>
                                     </div>
                             )})}
                             </div>
