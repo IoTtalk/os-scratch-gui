@@ -54,8 +54,15 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     initTelemetryModal
                 } = guiRedux;
                 const {ScratchPaintReducer} = require('scratch-paint');
+                const sessionRedux = require('../reducers/session');
+                const sessionReducer = sessionRedux.default;
+                const {
+                    sessionInitialState,
+                    sessionMiddleware
+                } = sessionRedux;
 
                 let initializedGui = guiInitialState;
+                let initializedSession = sessionInitialState;
                 if (props.isFullScreen || props.isPlayerOnly) {
                     if (props.isFullScreen) {
                         initializedGui = initFullScreen(initializedGui);
@@ -69,13 +76,15 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 reducers = {
                     locales: localesReducer,
                     scratchGui: guiReducer,
-                    scratchPaint: ScratchPaintReducer
+                    scratchPaint: ScratchPaintReducer,
+                    session: sessionReducer
                 };
                 initialState = {
                     locales: initializedLocales,
-                    scratchGui: initializedGui
+                    scratchGui: initializedGui,
+                    session: initializedSession
                 };
-                enhancer = composeEnhancers(guiMiddleware);
+                enhancer = composeEnhancers(guiMiddleware, sessionMiddleware);
             }
             const reducer = combineReducers(reducers);
             this.store = createStore(
