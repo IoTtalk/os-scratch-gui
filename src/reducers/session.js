@@ -14,7 +14,7 @@ const initialState = {
         user: {
             username: null,
             email: null,
-            picture: null
+            thumbnailUrl: null
         }
     },
     authenticated: false
@@ -37,7 +37,7 @@ const reducer = function (state, action) {
                 user: {
                     username: action.user.name,
                     email: action.user.email,
-                    picture: action.user.picture
+                    thumbnailUrl: action.user.picture
                 }
             }
         });

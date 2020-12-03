@@ -616,7 +616,7 @@ class MenuBar extends React.Component {
                         this.props.username ? (
                             // ************ user is logged in ************
                             <React.Fragment>
-                                <a href="/mystuff/">
+                                {/*<a href="/mystuff/">
                                     <div
                                         className={classNames(
                                             styles.menuBarItem,
@@ -629,7 +629,7 @@ class MenuBar extends React.Component {
                                             src={mystuffIcon}
                                         />
                                     </div>
-                                </a>
+                                </a>*/}
                                 <AccountNav
                                     className={classNames(
                                         styles.menuBarItem,
