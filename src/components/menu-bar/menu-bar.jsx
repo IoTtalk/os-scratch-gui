@@ -31,6 +31,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import QRcodeBtn from '../qrcode-button/qrcode-button.jsx';
+import LoginStatusModal from '../login-status-modal/login-status-modal.jsx'
 
 
 import {openTipsLibrary} from '../../reducers/modals';
@@ -527,7 +528,7 @@ class MenuBar extends React.Component {
                         )}
                     >
                         <QRcodeBtn/>
-
+                        <LoginStatusModal/>
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     {this.props.canEditTitle ? (
