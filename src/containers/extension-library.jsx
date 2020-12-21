@@ -1,8 +1,12 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 import VM from 'scratch-vm';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
+
+import eventBus from "../util/EventBus";
 
 import extensionLibraryContent from '../lib/libraries/extensions/index.jsx';
 
@@ -32,6 +36,10 @@ class ExtensionLibrary extends React.PureComponent {
     handleItemSelect (item) {
         const id = item.extensionId;
         let url = item.extensionURL ? item.extensionURL : id;
+        if (id.includes("iottalk") && !this.props.loggedIn){
+            eventBus.dispatch("login_status", { status: "To gain access to IoTTalk services, please log in." });
+            return;
+        }
         if (!item.disabled && !id) {
             // eslint-disable-next-line no-alert
             url = prompt(this.props.intl.formatMessage(messages.extensionUrl));
@@ -73,4 +81,16 @@ ExtensionLibrary.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired // eslint-disable-line react/no-unused-prop-types
 };
 
-export default injectIntl(ExtensionLibrary);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        loggedIn: state.session.authenticated,
+    };
+};
+
+export default compose(
+    injectIntl,
+    connect(
+        mapStateToProps,
+        null
+    )
+)(ExtensionLibrary);
