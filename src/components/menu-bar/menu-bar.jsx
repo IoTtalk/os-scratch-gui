@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import bowser from 'bowser';
 import React from 'react';
+import axios from 'axios';
 
 import VM from 'scratch-vm';
 
@@ -29,8 +30,8 @@ import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
-import IoTtalkConnBtn from '../iottalk-connection-button/iottalk-connection-button.jsx';
 import QRcodeBtn from '../qrcode-button/qrcode-button.jsx';
+import LoginStatusModal from '../login-status-modal/login-status-modal.jsx'
 
 
 import {openTipsLibrary} from '../../reducers/modals';
@@ -61,6 +62,12 @@ import {
     closeLoginMenu,
     loginMenuOpen
 } from '../../reducers/menus';
+import {
+    checkLoginStatus,
+    getProfile,
+    logout
+} from '../../reducers/session';
+import {serverName} from "../../../config";
 
 import collectMetadata from '../../lib/collect-metadata';
 
@@ -174,6 +181,14 @@ class MenuBar extends React.Component {
             'getSaveToComputerHandler',
             'restoreOptionMessage'
         ]);
+    }
+    componentWillMount () {
+        if(!this.props.loggedIn){
+            this.props.getloginStatus();
+        }
+        if(!this.props.username){
+            this.props.getUserProfile();
+        }
     }
     componentDidMount () {
         document.addEventListener('keydown', this.handleKeyPress);
@@ -513,7 +528,7 @@ class MenuBar extends React.Component {
                         )}
                     >
                         <QRcodeBtn/>
-
+                        <LoginStatusModal/>
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     {this.props.canEditTitle ? (
@@ -602,7 +617,7 @@ class MenuBar extends React.Component {
                         this.props.username ? (
                             // ************ user is logged in ************
                             <React.Fragment>
-                                <a href="/mystuff/">
+                                {/*<a href="/mystuff/">
                                     <div
                                         className={classNames(
                                             styles.menuBarItem,
@@ -615,7 +630,7 @@ class MenuBar extends React.Component {
                                             src={mystuffIcon}
                                         />
                                     </div>
-                                </a>
+                                </a>*/}
                                 <AccountNav
                                     className={classNames(
                                         styles.menuBarItem,
@@ -633,43 +648,82 @@ class MenuBar extends React.Component {
                         ) : (
                             // ********* user not logged in, but a session exists
                             // ********* so they can choose to log in
-                            <React.Fragment>
-                                <div
-                                    className={classNames(
-                                        styles.menuBarItem,
-                                        styles.hoverable
-                                    )}
-                                    key="join"
-                                    onMouseUp={this.props.onOpenRegistration}
-                                >
-                                    <FormattedMessage
-                                        defaultMessage="Join Scratch"
-                                        description="Link for creating a Scratch account"
-                                        id="gui.menuBar.joinScratch"
-                                    />
-                                </div>
-                                <div
-                                    className={classNames(
-                                        styles.menuBarItem,
-                                        styles.hoverable
-                                    )}
-                                    key="login"
-                                    onMouseUp={this.props.onClickLogin}
-                                >
-                                    <FormattedMessage
-                                        defaultMessage="Sign in"
-                                        description="Link for signing in to your Scratch account"
-                                        id="gui.menuBar.signIn"
-                                    />
-                                    <LoginDropdown
-                                        className={classNames(styles.menuBarMenu)}
-                                        isOpen={this.props.loginMenuOpen}
-                                        isRtl={this.props.isRtl}
-                                        renderLogin={this.props.renderLogin}
-                                        onClose={this.props.onRequestCloseLogin}
-                                    />
-                                </div>
-                            </React.Fragment>
+                            this.props.loggedIn ? (
+                                <React.Fragment>
+                                    <div
+                                        className={classNames(
+                                            styles.menuBarItem,
+                                            styles.hoverable
+                                        )}
+                                        key="logout"
+                                        onClick={this.logout}
+
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="Sign out"
+                                            description="Text to link to sign out, in the account navigation menu"
+                                            id="gui.accountMenu.signOut"
+                                        />
+                                    </div>
+                                </React.Fragment>
+                            ):(
+                                <React.Fragment>
+                                    {/*<div
+                                        className={classNames(
+                                            styles.menuBarItem,
+                                            styles.hoverable
+                                        )}
+                                        key="join"
+                                        onMouseUp={this.props.onOpenRegistration}
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="Join Scratch"
+                                            description="Link for creating a Scratch account"
+                                            id="gui.menuBar.joinScratch"
+                                        />
+                                    </div>
+                                    <div
+                                        className={classNames(
+                                            styles.menuBarItem,
+                                            styles.hoverable
+                                        )}
+                                        key="login"
+                                        onMouseUp={this.props.onClickLogin}
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="Sign in"
+                                            description="Link for signing in to your Scratch account"
+                                            id="gui.menuBar.signIn"
+                                        />
+                                        <LoginDropdown
+                                            className={classNames(styles.menuBarMenu)}
+                                            isOpen={this.props.loginMenuOpen}
+                                            isRtl={this.props.isRtl}
+                                            renderLogin={this.props.renderLogin}
+                                            onClose={this.props.onRequestCloseLogin}
+                                        />
+                                    </div>*/}
+                                    <div
+                                        className={classNames(
+                                            styles.menuBarItem,
+                                            styles.hoverable
+                                        )}
+                                        onMouseUp={this.props.onClickLogin}
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="Sign in"
+                                            description="Link for signing in to your Scratch account"
+                                            id="gui.menuBar.signIn"
+                                        />
+                                        <LoginDropdown
+                                            className={classNames(styles.menuBarMenu)}
+                                            isOpen={this.props.loginMenuOpen}
+                                            isRtl={this.props.isRtl}
+                                            onClose={this.props.onRequestCloseLogin}
+                                        />
+                                    </div>
+                                </React.Fragment>
+                            )
                         )
                     ) : (
                         // ******** no login session is available, so don't show login stuff
@@ -745,6 +799,8 @@ MenuBar.propTypes = {
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
+    getloginStatus: PropTypes.func,
+    getUserProfile: PropTypes.func,
     intl: intlShape,
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
@@ -752,6 +808,7 @@ MenuBar.propTypes = {
     isUpdating: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
     locale: PropTypes.string.isRequired,
+    loggedIn: PropTypes.bool,
     loginMenuOpen: PropTypes.bool,
     logo: PropTypes.string,
     onClickAbout: PropTypes.func,
@@ -804,6 +861,7 @@ const mapStateToProps = (state, ownProps) => {
         isShowingProject: getIsShowingProject(loadingState),
         languageMenuOpen: languageMenuOpen(state),
         locale: state.locales.locale,
+        loggedIn: state.session.authenticated,
         loginMenuOpen: loginMenuOpen(state),
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
@@ -816,6 +874,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
     autoUpdateProject: () => dispatch(autoUpdateProject()),
+    getUserProfile: () => dispatch(getProfile()),
+    getloginStatus: () => dispatch(checkLoginStatus()),
+    onLogOut: () => dispatch(logout()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
     onRequestCloseAccount: () => dispatch(closeAccountMenu()),
