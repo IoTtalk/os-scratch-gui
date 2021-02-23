@@ -130,33 +130,155 @@ $sides: 20rem;
     transform: scaleX(-1);
 }
 
-.header-item-help {
-    padding: 0;
-    z-index: 1;
-}
-
-[dir="ltr"] .header-item-help {
-    margin-right: -4.75rem;
-}
-
-[dir="rtl"] .header-item-help {
-    margin-left: -4.75rem;
-}
-
-.help-button {
-    font-weight: normal;
-    font-size: 0.75rem;
-}
-
-[dir="ltr"] .help-button {
-    padding-right: 0;
-}
-
-[dir="rtl"] .help-button {
-    padding-left: 0;
-}
-
 .img {
     height: 1.5rem;
     vertical-align:middle;
+}
+
+.button-row {
+    font-weight: bolder;
+    text-align: center;
+    display: flex;
+}
+
+.bottom-area {
+    background-color: $ui-white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: .75rem;
+    padding-left: .75rem;
+    padding-right: .75rem;
+}
+
+.connection-button {
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.5rem;
+    background: $motion-primary;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin: 0.25rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.connection-button:disabled {
+    background: $motion-transparent;
+}
+
+.segmented-button {
+    display: flex;
+}
+
+.segmented-button .connection-button:first-of-type {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: 0;
+}
+
+.segmented-button .connection-button:last-of-type {
+    margin-left: 1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+[dir="ltr"] .button-icon-right {
+    margin-left: 0.5rem;
+}
+[dir="rtl"] .button-icon-right {
+    margin-right: 0.5rem;
+}
+
+[dir="ltr"] .button-icon-left {
+    margin-right: 0.5rem;
+}
+
+[dir="rtl"] .button-icon-left {
+    margin-left: 0.5rem;
+}
+
+/* reverse back arrow icon for RTL, don't reverse other connection icons */
+[dir="rtl"] .button-icon-back {
+    transform: scaleX(-1);
+}
+
+.red-button {
+    background: $red-primary;
+}
+
+.corner-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.bottom-area {
+    background-color: $ui-white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: .75rem;
+    padding-left: .75rem;
+    padding-right: .75rem;
+}
+
+.bottom-area .bottom-area-item+.bottom-area-item {
+    margin-top: 1rem;
+}
+
+.instructions {
+    text-align: center;
+}
+
+.dots-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.dots-holder {
+    display: flex;
+    padding: 0.25rem 0.1rem;
+    border-radius: 1rem;
+    background: $motion-light-transparent;
+}
+
+.dots-holder-success {
+    background: $pen-transparent;
+}
+
+.dots-holder-error {
+    background: $error-transparent;
+}
+
+.dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: 0 0.3rem;
+    border-radius: 100%;
+}
+
+.inactive-step-dot {
+    background: $motion-transparent;
+}
+
+.active-step-dot {
+    background: $motion-primary;
+}
+
+.success-dot {
+    background: $pen-primary;
+}
+
+.error-dot {
+    background: $error-primary;
 }

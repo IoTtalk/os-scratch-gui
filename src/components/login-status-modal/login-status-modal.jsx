@@ -2,12 +2,21 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import ReactModal from 'react-modal';
 import classNames from 'classnames';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {FormattedMessage} from 'react-intl';
+import Box from '../box/box.jsx';
 
 import CloseButton from '../close-button/close-button.jsx';
+import Button from '../button/button.jsx';
 import styles from './login-status-modal.css';
 import eventBus from "../../util/EventBus";
 
-export default class LoginStatusModal extends Component {
+import {
+    login
+} from '../../reducers/session';
+
+class LoginStatusModal extends Component {
     constructor(props) {
         super();
         this.state = {
@@ -61,7 +70,33 @@ export default class LoginStatusModal extends Component {
                     {this.state.login_status}
                 </div>
 
+                <Box className={styles.bottomArea}>
+                    <Box className={classNames(styles.bottomAreaItem, styles.buttonRow)}>
+                        <button
+                            className={styles.connectionButton}
+                            onClick={this.props.onClickLogin}
+                        >
+                            <FormattedMessage
+                                defaultMessage="Sign in"
+                                description="Sign in"
+                                id="gui.button.signin"
+                            />
+                        </button>
+                    </Box>
+                </Box>
+
             </ReactModal>
         );
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    onClickLogin: () => dispatch(login())
+});
+
+export default compose(
+    connect(
+        null,
+        mapDispatchToProps
+    )
+)(LoginStatusModal);
