@@ -61,7 +61,7 @@ class LibraryComponent extends React.Component {
             this.setState({loaded: true});
         });
         if (this.props.setStopHandler) this.props.setStopHandler(this.handlePlayingEnd);
-        eventBus.on("direct_to_signin", (data) => this.props.onClickLogin());
+        eventBus.on("direct_to_signin", () => window.location = serverName + "/service/auth");
     }
     componentDidUpdate (prevProps, prevState) {
         if (prevState.filterQuery !== this.state.filterQuery ||
