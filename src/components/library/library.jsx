@@ -3,6 +3,8 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 import LibraryItem from '../../containers/library-item.jsx';
 import Modal from '../../containers/modal.jsx';
@@ -12,6 +14,9 @@ import TagButton from '../../containers/tag-button.jsx';
 import Spinner from '../spinner/spinner.jsx';
 
 import styles from './library.css';
+
+import eventBus from "../../util/EventBus";
+import {login} from '../../reducers/session';
 
 const messages = defineMessages({
     filterPlaceholder: {
@@ -56,6 +61,7 @@ class LibraryComponent extends React.Component {
             this.setState({loaded: true});
         });
         if (this.props.setStopHandler) this.props.setStopHandler(this.handlePlayingEnd);
+        eventBus.on("direct_to_signin", () => window.location = serverName + "/service/auth");
     }
     componentDidUpdate (prevProps, prevState) {
         if (prevState.filterQuery !== this.state.filterQuery ||
@@ -263,6 +269,7 @@ LibraryComponent.propTypes = {
     filterable: PropTypes.bool,
     id: PropTypes.string.isRequired,
     intl: intlShape.isRequired,
+    onClickLogin: PropTypes.func,
     onItemMouseEnter: PropTypes.func,
     onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,
@@ -278,4 +285,14 @@ LibraryComponent.defaultProps = {
     showPlayButton: false
 };
 
-export default injectIntl(LibraryComponent);
+const mapDispatchToProps = dispatch => ({
+    onClickLogin: () => dispatch(login())
+});
+
+export default compose(
+    injectIntl,
+    connect(
+        null,
+        mapDispatchToProps
+    )
+)(LibraryComponent);

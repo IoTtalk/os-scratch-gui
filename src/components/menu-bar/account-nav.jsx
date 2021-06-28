@@ -17,6 +17,9 @@ import dropdownCaret from './dropdown-caret.svg';
 
 import styles from './account-nav.css';
 
+import {serverName} from "../../../config";
+const signOutURL = <a href={`${serverName}/service/auth/sign_out`}>Sign out</a>
+
 const AccountNavComponent = ({
     className,
     classroomId,
@@ -104,12 +107,8 @@ const AccountNavComponent = ({
                 />
             </MenuItemContainer>*/}
             <MenuSection>
-                <MenuItemContainer onClick={onLogOut}>
-                    <FormattedMessage
-                        defaultMessage="Sign out"
-                        description="Text to link to sign out, in the account navigation menu"
-                        id="gui.accountMenu.signOut"
-                    />
+                <MenuItemContainer>
+                    {signOutURL}
                 </MenuItemContainer>
             </MenuSection>
         </MenuBarMenu>

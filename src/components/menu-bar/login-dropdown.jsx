@@ -17,9 +17,6 @@ import MenuBarMenu from './menu-bar-menu.jsx';
 import styles from './login-dropdown.css';
 import {serverName} from "../../../config";
 
-import {
-    login
-} from '../../reducers/session';
 
 // these are here as a hack to get them translated, so that equivalent messages will be translated
 // when passed in from www via gui's renderLogin() function
@@ -51,19 +48,12 @@ const LoginDropdownMessages = defineMessages({ // eslint-disable-line no-unused-
     }
 });
 
+const signInURL = <a href={`${serverName}/service/account/login/google`}>Sign in with Google</a>
 
 class LoginDropdown extends React.Component {
     constructor (props) {
         super(props);
     }
-
-    // var login = () => {
-    //     // window.location.href = `${serverName}/service/account/login/google`;
-    //     axios.get(`${serverName}/service/account/login/google`)
-    //         .then(res => {
-    //             window.location = res.data.redirect;
-    //         });
-    // }
 
     render(){
         return (
@@ -84,8 +74,9 @@ class LoginDropdown extends React.Component {
                     className={classNames(
                         styles.button
                     )}
-                    onClick={this.props.onClickLogin}>
-                    Sign in with Google
+                    // onClick={this.props.onClickLogin}
+                    >
+                        {signInURL}
                 </button>
                     {/*renderLogin({
                         onClose: onClose

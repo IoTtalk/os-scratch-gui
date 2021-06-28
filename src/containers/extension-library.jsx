@@ -37,7 +37,7 @@ class ExtensionLibrary extends React.PureComponent {
         const id = item.extensionId;
         let url = item.extensionURL ? item.extensionURL : id;
         if (id.includes("iottalk") && !this.props.loggedIn){
-            eventBus.dispatch("login_status", { status: "To gain access to IoTTalk services, please log in." });
+            eventBus.dispatch("direct_to_signin", {});
             return;
         }
         if (!item.disabled && !id) {
