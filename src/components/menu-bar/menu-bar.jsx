@@ -709,9 +709,9 @@ class MenuBar extends React.Component {
                                         onMouseUp={this.props.onClickLogin}
                                     >
                                         <FormattedMessage
-                                            defaultMessage="Sign in"
+                                            defaultMessage="Login"
                                             description="Link for signing in to your Scratch account"
-                                            id="gui.menuBar.signIn"
+                                            id="gui.menuBar.login"
                                         />
                                         <LoginDropdown
                                             className={classNames(styles.menuBarMenu)}

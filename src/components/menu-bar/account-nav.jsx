@@ -18,7 +18,7 @@ import dropdownCaret from './dropdown-caret.svg';
 import styles from './account-nav.css';
 
 import {serverName} from "../../../config";
-const signOutURL = <a href={`${serverName}/service/auth/sign_out`}>Sign out</a>
+const logoutURL = <a href={`${serverName}/service/auth/logout`}>logout</a>
 
 const AccountNavComponent = ({
     className,
@@ -108,7 +108,7 @@ const AccountNavComponent = ({
             </MenuItemContainer>*/}
             <MenuSection>
                 <MenuItemContainer>
-                    {signOutURL}
+                    {logoutURL}
                 </MenuItemContainer>
             </MenuSection>
         </MenuBarMenu>

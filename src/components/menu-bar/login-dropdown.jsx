@@ -48,7 +48,7 @@ const LoginDropdownMessages = defineMessages({ // eslint-disable-line no-unused-
     }
 });
 
-const signInURL = <a href={`${serverName}/service/account/login/google`}>Sign in with Google</a>
+const loginURL = <a href={`${serverName}/service/auth/`}>Login with IoTtalk</a>
 
 class LoginDropdown extends React.Component {
     constructor (props) {
@@ -76,7 +76,7 @@ class LoginDropdown extends React.Component {
                     )}
                     // onClick={this.props.onClickLogin}
                     >
-                        {signInURL}
+                        {loginURL}
                 </button>
                     {/*renderLogin({
                         onClose: onClose
