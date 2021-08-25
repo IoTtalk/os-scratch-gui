@@ -35,7 +35,7 @@ const reducer = function (state, action) {
         return Object.assign({}, state, {
             session: {
                 user: {
-                    username: action.user.name,
+                    username: action.user.username,
                     email: action.user.email,
                     thumbnailUrl: action.user.picture
                 }
