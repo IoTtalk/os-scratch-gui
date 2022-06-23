@@ -48,7 +48,7 @@ const reducer = function (state, action) {
 
 const getProfile = () => {
     return (dispatch, state) => {
-        axios.post(`${serverName}/service/account/userprofile`)
+        axios.post(`${serverName}/service/auth/userprofile`)
             .then(res => {
                 dispatch(setProfile(JSON.parse(res.data.user)));
             });
@@ -76,7 +76,7 @@ const login = () => {
 
 const checkLoginStatus = () => {
     return (dispatch, state) => {
-        axios.post(`${serverName}/service/account/status`)
+        axios.post(`${serverName}/service/auth/status`)
             .then(res => {
                 if(res.data.session){
                     dispatch(setLogin());

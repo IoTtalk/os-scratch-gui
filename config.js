@@ -1,2 +1,2 @@
-exports.iottalkURL = "<iottalk URL>";
-exports.serverName = "<scratch domain name>";
+exports.iottalkCSM = "<IoTtalk Address>";
+exports.serverName = "<ScratchTalk Address>";

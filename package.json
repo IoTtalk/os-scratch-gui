@@ -145,6 +145,7 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
-    "qrcode.react": "^1.0.0"
+    "qrcode.react": "^1.0.0",
+    "redux-thunk": "^2.3.0"
   }
 }

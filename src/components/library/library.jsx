@@ -18,6 +18,7 @@ import styles from './library.css';
 import eventBus from "../../util/EventBus";
 import {login} from '../../reducers/session';
 
+const serverName = "<ScratchTalk Address>"
 const messages = defineMessages({
     filterPlaceholder: {
         id: 'gui.library.filterPlaceholder',

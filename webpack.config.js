@@ -21,7 +21,8 @@ const base = {
         contentBase: path.resolve(__dirname, 'build'),
         host: '0.0.0.0',
         port: process.env.PORT || 8601,
-        public: '<your domain name>',
+        public: '<scratch GUI domain name>',
+        disableHostCheck: true,
     },
     output: {
         library: 'GUI',
