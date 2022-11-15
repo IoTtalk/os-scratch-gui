@@ -66,7 +66,7 @@ const setLogin = () => ({
 
 const login = () => {
     return (dispatch, state) => {
-        axios.get(`${serverName}/service/account/login/google`)
+        axios.get(`${serverName}/service/auth/login/google`)
             .then(res => {
                 window.location = res.data.redirect;
             });
@@ -87,7 +87,7 @@ const checkLoginStatus = () => {
 
 const logout = () => {
     return (dispatch, state) => {
-        axios.get(`${serverName}/service/account/logout`)
+        axios.get(`${serverName}/service/auth/logout`)
             .then(res => {
                 window.location = res.data.redirect;
             });

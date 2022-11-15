@@ -361,23 +361,4 @@ export default [
         bluetoothRequired: false,
         helpLink: 'https://scratch.mit.edu/wedo'
     },
-    {
-        name: 'IoTtalk (MICR 311)',
-        extensionId: 'iottalkroom',
-        collaborator: 'IoTtalk',
-        iconURL: iottalkRoomIcon,
-        insetIconURL: iottalkInsetIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="Control smart devices."
-                description="Easy Connected"
-                id="gui.extension.iottalk.room.mirc311.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        internetConnectionRequired: true,
-        bluetoothRequired: false,
-        helpLink: 'https://scratch.mit.edu/wedo'
-    },
 ];
